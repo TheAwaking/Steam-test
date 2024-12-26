@@ -3,7 +3,7 @@ from pages.base_page import BasePage
 from selenium.webdriver.common.keys import Keys
 
 
-class MainPage(BasePage):
+class MainPageStore(BasePage):
     def test_page(self):
         search_field = self.is_visible(Locators.SEARCH_FIELD)
         search_field.send_keys('Fallout')
