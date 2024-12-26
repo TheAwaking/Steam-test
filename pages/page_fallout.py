@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 
 
 class MainPageStore(BasePage):
-    def test_page(self):
+    def test_page(self): #поменять имя
         search_field = self.is_visible(Locators.SEARCH_FIELD)
         search_field.send_keys('Fallout')
         search_field.send_keys(Keys.RETURN)
