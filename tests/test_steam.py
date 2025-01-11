@@ -1,5 +1,6 @@
 from tests.conftest import driver
-from pages.page_the_witcher import TestMainPage
+from pages.main_page import MainPage
+from pages.main_page import SearchPage
 import pytest
 from config_reader import ConfigReader
 
@@ -12,13 +13,15 @@ config_reader = ConfigReader('../config.json')
 ])
 class TestSearchPage:
     def test_search_for_game(self, driver, game, n):
-        base_url = config_reader.get_base_url()
-        main_page = TestMainPage(driver, base_url)
+        base_url = config_reader.get_value(self)
+        main_page = MainPage(driver, base_url)
+        search_page = SearchPage(driver, base_url)
         main_page.open()
-        assert main_page.page_displayed()
-        main_page.home_page()
-        main_page.sort_by_trigger()
-        main_page.filter_by_trigger()
-        assert main_page.sort_displayed()
-        search_result = main_page.home_page(game)
-        assert search_result == game
+        assert main_page.page_displayed(), "page is not displayed"
+        search_page.enter_game_name_and_search(game)
+        search_page.sort_by_trigger()
+        assert search_page.gray_screen(), "gray screen is visible"
+        search_page.filter_by_trigger()
+        assert search_page.sort_displayed(), "price is not displayed"
+
+

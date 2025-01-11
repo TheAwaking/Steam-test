@@ -1,11 +1,8 @@
 {
   "base_url": "https://store.steampowered.com/",
-  "timeout": 5,
-  "browser_options": {
-    "window_size": [
-      1920,
-      1080
-    ],
-    "headless": false
-  }
+  "timeout": 20,
+  "browser_options": [
+    "--headless",
+    "--window-size=1920,1080"
+  ]
 }
