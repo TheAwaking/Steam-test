@@ -7,4 +7,4 @@ class ConfigReader:
             self.config = json.load(f)
 
     def get_value(self, key):
-        return self.config[key]
+        return self.config.get(key)
