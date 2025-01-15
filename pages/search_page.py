@@ -2,6 +2,7 @@ from pages.base_page import BasePage
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+import re
 
 
 class SearchPage(BasePage):
@@ -10,7 +11,7 @@ class SearchPage(BasePage):
     FILTER_BY = (By.ID, "Price_ASC")
     CONTAINER = (By.XPATH, "//*[contains(@id, 'search_result_container') and contains(@style, 'opacity')]")
     SEARCH_RESULTS = (By.XPATH, "//*[@class='discount_final_price']")
-    PRICES = (By.XPATH, "(//*[@class='discount_final_price'])[position() <= {}]")
+    PRICES = (By.XPATH, "(//*[@class='discount_final_price'])[position() <= {n}]")
 
     def enter_game_name_and_search(self, game):
         search_field = self.wait.until(EC.visibility_of_element_located(self.SEARCH_FIELD))
@@ -32,5 +33,6 @@ class SearchPage(BasePage):
         self.wait.until(EC.visibility_of_element_located(self.SEARCH_RESULTS))
 
     def sort_n_prices(self, n):
-        self.wait.until(EC.presence_of_all_elements_located(self.PRICES)).format(n)
-
+        price_element = self.wait.until(EC.presence_of_all_elements_located(self.PRICES)).format(n)
+        prices = [price.text.strip() for price in price_element]
+        return prices
