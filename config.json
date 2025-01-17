@@ -1,0 +1,9 @@
+{
+  "base_url": "https://store.steampowered.com/",
+  "timeout": 20,
+  "browser_options": [
+    "--headless",
+    "--window-size=1920,1080"
+  ]
+}
+
