@@ -16,3 +16,4 @@ def open_url(driver):
     config_reader = ConfigReader('../config.json')
     url = config_reader.get_value("base_url")
     driver.get(url)
+    return driver
